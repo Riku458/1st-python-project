@@ -61,7 +61,7 @@ def dl_youtube():                                       # 2. Create a funtion th
             with yt_dlp.YoutubeDL(yt_opts) as ydl:
                 ydl.download([url])
             
-            messagebox.showinfo("Success", f"Downloaded {format_choice.upper()} in {quality_choice} quality in {download_folder}! Compatible with mobile and standard media players.")
+            messagebox.showinfo("Success", "Download complete!")
         except Exception as e:
             messagebox.showerror("Error", f"Download failed: {str(e)}")
 
