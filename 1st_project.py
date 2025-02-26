@@ -6,9 +6,7 @@ import tkinter as tk # this is for the GUI library
 from tkinter import messagebox, filedialog # this will be important for notification of what happened in the file and downloading process
 import yt_dlp # this is for downloading the youtube links (I changed it into yt_dlp)
 
-# 2. Create a funtion that will get the youtube link
-
-def dl_youtube():
+def dl_youtube():                                       # 2. Create a funtion that will get the youtube link
     def task():
         url = url_entry.get()
         if not url:
@@ -24,9 +22,7 @@ def dl_youtube():
 
         os.makedirs(download_folder, exist_ok=True)
 
-# 3. Create a function that will find the quality and format of file of what the user's want to download        
-
-        video_quality_map = {
+        video_quality_map = {                            # 3. Create a function that will find the quality and format of file of what the user's want to download        
             "144p": "bv*[height=144]+ba/b[height=144]",
             "240p": "bv*[height=240]+ba/b[height=240]",
             "360p": "bv*[height=360]+ba/b[height=360]",
@@ -45,7 +41,7 @@ def dl_youtube():
             "Best": "best"
         }
 
-        if format_choice == "mp4"
+        if format_choice == "mp4":
             selected_format = video_quality_map.get(quality_choice, "bestvideo+bestaudio/best")
             yt_opts = {
                 'outtmpl': os.path.join(download_folder, f'%(title)s_{quality_choice}.%(ext)s'),
@@ -73,6 +69,9 @@ def dl_youtube():
 
 
 # 4. Create a funtion that will implement that quality of what the user want
+
+def update_quality_options(*args):
+    quality_dropdown["menu"].delete(0, "end ")
 
 
 
