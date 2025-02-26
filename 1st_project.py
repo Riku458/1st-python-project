@@ -46,7 +46,19 @@ def dl_youtube():
 
         if format_choice == "mp4"
             selected_format = video_quality_map.get(quality_choice, "bestvideo+bestaudio/best")
-            yt_opts = 
+            yt_opts = {
+                'outtmpl': os.path.join(download_folder, f'%(title)s_{quality_choice}.%(ext)s'),
+                'format': selected_format,
+                'merge_output_format': 'mp4',
+                'postprocessor_args': ['-c:a', 'aac']
+            }
+        else:
+            selected_quality = audio_quality_map.get(quality_choice, "192")
+            yt_opts = {
+                'outtmpl': os.path.join(download_folder, f'%(title)s_{quality_choice}kbps.%(ext)s'),
+                'format': 'bestaudio',
+                'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3', 'preferredquality': selected_quality}]
+            }
 
     threading.Thread(target=task).start()
 
