@@ -23,7 +23,8 @@ def dl_youtube():
             return
 
         os.makedirs(download_folder, exist_ok=True)
-        
+
+# 3. Create a function that will find the quality and format of file of what the user's want to download        
 
         video_quality_map = {
             "144p": "bv*[height=144]+ba/b[height=144]",
@@ -60,10 +61,15 @@ def dl_youtube():
                 'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3', 'preferredquality': selected_quality}]
             }
 
+        try:
+            with yt_dlp.YoutubeDL(yt_opts) as ydl:
+                ydl.download([url])
+            
+            messagebox.showinfo("Success", f"Downloaded {format_choice.upper()} in {quality_choice} quality in {download_folder}! Compatible with mobile and standard media players.")
+        except Exception as e:
+            messagebox.showerror("Error", f"Download failed: {str(e)}")
+
     threading.Thread(target=task).start()
-
-# 3. Create a function that will find the quality and format of file of what the user's want to download
-
 
 
 # 4. Create a funtion that will implement that quality of what the user want
