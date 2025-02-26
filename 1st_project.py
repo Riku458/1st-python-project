@@ -65,20 +65,23 @@ def dl_youtube():                                       # 2. Create a funtion th
         except Exception as e:
             messagebox.showerror("Error", f"Download failed: {str(e)}")
 
-    threading.Thread(target=task).start()
+    threading.Thread(target=task,).start()
 
 def update_quality_options(*args):                     # 4. Create a funtion that will implement that quality of what the user want
-    quality_dropdown["menu"].delete(0, "end ")
+    global quality_var, quality_dropdown
+
+    quality_dropdown["menu"].delete(0, "end")
 
     if format_var.get() == "mp4":
         options = ["144p", "240p", "360p", "480p", "720p", "1080p", "Best"]
     else:
-        options = ["64kbps", "128kbps", "192kbps", "256kbps", "360kbps", "Best"]
+        options = ["64kbps", "128kbps", "192kbps", "256kbps", "320kbps", "Best"]
+
+    middle_index = len(options) // 2 
+    quality_var.set(options[middle_index])  
 
     for option in options:
         quality_dropdown["menu"].add_command(label=option, command=tk._setit(quality_var, option))
-
-    quality_var.set(options[0])
 
 def create_gui():                                      # 5. Create a GUI of the project (Height, Width, Button, and Input Box)
     global url_entry, format_var, quality_var, quality_dropdown
@@ -99,14 +102,14 @@ def create_gui():                                      # 5. Create a GUI of the 
     options_frame = tk.Frame(root, bg="#2C3E50")
     options_frame.pack()
     tk.Radiobutton(options_frame, text="MP4", variable=format_var, value="mp4", bg="#2C3E50", fg="white", selectcolor="#34495E", font=("Futura", 10)).pack(side=tk.LEFT, padx=10)
-    tk.Radiobutton(options_frame, text="MP3", variable=format_var, value="mp4", bg="#2C3E50", fg="white", selectcolor="#34495E", font=("Futura", 10)).pack(side=tk.LEFT)
+    tk.Radiobutton(options_frame, text="MP3", variable=format_var, value="mp3", bg="#2C3E50", fg="white", selectcolor="#34495E", font=("Futura", 10)).pack(side=tk.LEFT)
 
     tk.Label(root, text="Select Quality:", font=("Helvetica", 12), bg="#2C3E50", fg="white").pack(pady=5)
     quality_dropdown = tk.OptionMenu(root, quality_var, "")
     quality_dropdown.pack(pady=5)
     update_quality_options()
 
-    tk.Button(root, text="Download", command=dl_youtube, font=("Helvetica", 12, "bold"), width=20, bg="#27AE60", fg="#27AE60", relief="flat").pack(pady=10)
+    tk.Button(root, text="Download", command=dl_youtube, font=("Helvetica", 12, "bold"), width=20, bg="#27AE60", fg="white", relief="flat").pack(pady=10)
     tk.Button(root, text="Exit", command=root.quit, font=("Helvetica", 12, "bold"), width=20, bg="#E74C3C", fg="white", relief="flat").pack()
 
     root.mainloop()
