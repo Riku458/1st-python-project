@@ -67,13 +67,23 @@ def dl_youtube():                                       # 2. Create a funtion th
 
     threading.Thread(target=task).start()
 
-
-# 4. Create a funtion that will implement that quality of what the user want
-
-def update_quality_options(*args):
+def update_quality_options(*args):                     # 4. Create a funtion that will implement that quality of what the user want
     quality_dropdown["menu"].delete(0, "end ")
 
+    if format_var.get() == "mp4":
+        options = ["144p", "240p", "360p", "480p", "720p", "1080p", "Best"]
+    else:
+        options = ["64kbps", "128kbps", "192kbps", "256kbps", "360kbps", "Best"]
 
+    for option in options:
+        quality_dropdown["menu"].add_command(label=option, command=tk._setit(quality_var, option))
 
-# 5. Create a GUI of the project (Height, Width, Button, and Input Box)
+    quality_var.set(options[0])
 
+def create_gui():                               
+    global url_entry, format_var, quality_var, quality_dropdown
+    root = tk.Tk()
+    root.title("")_
+
+if __name__ == "__main__":
+    create_gui()
