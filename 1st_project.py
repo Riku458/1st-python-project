@@ -99,7 +99,7 @@ def create_gui():                                      # 5. Create a GUI of the 
     options_frame = tk.Frame(root, bg="#2C3E50")
     options_frame.pack()
     tk.Radiobutton(options_frame, text="MP4", variable=format_var, value="mp4", bg="#2C3E50", fg="white", selectcolor="#34495E", font=("Futura", 10)).pack(side=tk.LEFT, padx=10)
-    tk.Radiobutton(options_frame, text="MP4", variable=format_var, value="mp4", bg="#2C3E50", fg="white", selectcolor="#34495E", font=("Futura", 10)).pack(side=tk.LEFT)
+    tk.Radiobutton(options_frame, text="MP3", variable=format_var, value="mp4", bg="#2C3E50", fg="white", selectcolor="#34495E", font=("Futura", 10)).pack(side=tk.LEFT)
 
     tk.Label(root, text="Select Quality:", font=("Helvetica", 12), bg="#2C3E50", fg="white").pack(pady=5)
     quality_dropdown = tk.OptionMenu(root, quality_var, "")
