@@ -80,10 +80,36 @@ def update_quality_options(*args):                     # 4. Create a funtion tha
 
     quality_var.set(options[0])
 
-def create_gui():                               
+def create_gui():                                      # 5. Create a GUI of the project (Height, Width, Button, and Input Box)
     global url_entry, format_var, quality_var, quality_dropdown
     root = tk.Tk()
-    root.title("")_
+    root.title("Quickieverter")
+    root.geometry("400x300")
+    root.configure(bg="#2C3E50")
+    root.option_add("*Font", "Futura 12")
+
+    tk.Label(root, text="Youtube Link/URL", font=("Futura", 12), bg="#2C3E50", fg="white").pack(pady=5)
+    url_entry = tk.Entry(root, width=50, font=("Futura", 10))
+    url_entry.pack(pady=5)
+
+    format_var = tk.StringVar(value="mp4")
+    format_var.trace_add("write", update_quality_options)
+    quality_var = tk.StringVar()
+
+    options_frame = tk.Frame(root, bg="#2C3E50")
+    options_frame.pack()
+    tk.Radiobutton(options_frame, text="MP4", variable=format_var, value="mp4", bg="#2C3E50", fg="white", selectcolor="#34495E", font=("Futura", 10)).pack(side=tk.LEFT, padx=10)
+    tk.Radiobutton(options_frame, text="MP4", variable=format_var, value="mp4", bg="#2C3E50", fg="white", selectcolor="#34495E", font=("Futura", 10)).pack(side=tk.LEFT)
+
+    tk.Label(root, text="Select Quality:", font=("Futura", 12), bg="#2C3E50", fg="white").pack(pady=5)
+    quality_dropdown = tk.OptionMenu(root, quality_var, "")
+    quality_dropdown.pack(pady=5)
+    update_quality_options()
+
+    tk.Button(root, text="Download", command=dl_youtube, font=("Futura", 12, "bold"), width=20, bg="#27AE60", fg="#27AE60", relief="flat").pack(pady=10)
+    tk.Button(root, text="Exit", command=root.quit, font=("Teko", 12, "bold"), width=20, bg="#E74C3C", fg="white", relief="flat").pack()
+
+    root.mainloop()
 
 if __name__ == "__main__":
     create_gui()
