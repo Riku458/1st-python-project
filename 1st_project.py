@@ -6,7 +6,7 @@ import tkinter as tk # this is for the GUI library
 from tkinter import messagebox, filedialog # this will be important for notification of what happened in the file and downloading process
 import yt_dlp # this is for downloading the youtube links (I changed it into yt_dlp)
 
-def dl_youtube():                                       # 2. Create a funtion that will get the youtube link
+def dl_youtube():                                       # 2. Create a funtion that will get the youtube link and to make a file directory for the video that the user want to download
     def task():
         url = url_entry.get()
         if not url:
